@@ -22,7 +22,10 @@ namespace RealDeal.DataAcces
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<AuctionRegistration>()
-                    .HasKey(a => new { a.UserID, a.ItemID });
+                .HasKey(pk => new { pk.UserID, pk.ItemID });
+
+            modelBuilder.Entity<History>()
+                .HasKey(pk => new { pk.UserID, pk.ItemID });
         }
     }
 }

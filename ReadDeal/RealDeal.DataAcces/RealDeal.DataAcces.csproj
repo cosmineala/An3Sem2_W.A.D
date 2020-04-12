@@ -15,4 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\RealDeal.AppLogic\RealDeal.AppLogic.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
 </Project>
