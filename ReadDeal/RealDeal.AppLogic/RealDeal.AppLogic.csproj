@@ -7,7 +7,4 @@
   <ItemGroup>
     <Folder Include="Models\" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\RealDeal.DataAcces\RealDeal.DataAcces.csproj" />
-  </ItemGroup>
 </Project>
