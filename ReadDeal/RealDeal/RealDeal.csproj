@@ -25,7 +25,6 @@
     <Folder Include="Data\Migrations\" />
     <Folder Include="Data\Migrations\Identity\" />
     <Folder Include="Data\Migrations\DataAcces\" />
-    <Folder Include="Databases\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RealDeal.DataAcces\RealDeal.DataAcces.csproj">
