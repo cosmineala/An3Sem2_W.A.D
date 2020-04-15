@@ -3,6 +3,14 @@ dotnet ef migrations add IdentityInitialCreate --context ApplicationDbContext --
 dotnet ef database update --context ApplicationDbContext
 dotnet ef migrations remove --context ApplicationDbContext
 
+---------------------------------------------------------------------------------------
 dotnet ef migrations add DataAccesInitialCreate --context DataAccesDbContext --output-dir Data/Migrations/DataAcces
 dotnet ef database update --context DataAccesDbContext
 dotnet ef migrations remove --context DataAccesDbContext
+------
+add-migration "Migration_Name" -Context "DbContext_Name"
+
+update-database -TargetMigration:"Migration_Name"
+
+
+

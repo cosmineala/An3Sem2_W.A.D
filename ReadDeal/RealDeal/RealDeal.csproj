@@ -23,8 +23,6 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
-    <Folder Include="Data\Migrations\Identity\" />
-    <Folder Include="Data\Migrations\DataAcces\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RealDeal.DataAcces\RealDeal.DataAcces.csproj">

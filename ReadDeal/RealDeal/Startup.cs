@@ -35,10 +35,16 @@ namespace ReadDeal
 
             services.AddDbContext<DataAccesDbContext>(options =>
                 options.UseSqlite(
-                    Configuration.GetConnectionString("ReakDealConnection"),
-                    x => x.MigrationsAssembly("RealDeal")
+                    Configuration.GetConnectionString("ReakDealConnection")
                 )
             );
+
+            //services.AddDbContext<DataAccesDbContext>(options =>
+            //    options.UseSqlite(
+            //        Configuration.GetConnectionString("ReakDealConnection"),
+            //        x => x.MigrationsAssembly("RealDeal")
+            //    )
+            //);
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();
