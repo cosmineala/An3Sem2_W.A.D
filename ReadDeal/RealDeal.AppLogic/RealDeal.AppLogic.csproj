@@ -6,5 +6,7 @@
 
   <ItemGroup>
     <Folder Include="Models\" />
+    <Folder Include="Abstractions\" />
+    <Folder Include="Services\" />
   </ItemGroup>
 </Project>

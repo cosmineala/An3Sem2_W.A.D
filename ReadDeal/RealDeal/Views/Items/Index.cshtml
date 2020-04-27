@@ -1,0 +1,77 @@
+﻿@model RealDeal.Models.ItemViewModel;
+
+@{
+    ViewData["Title"] = "Index";
+}
+@*
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container">
+
+            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                <ul class="navbar-nav flex-grow-1">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Items" asp-action="MyItemsForAuction">My items for auction</a>
+                    </li>
+                    <li>
+                        |
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Items" asp-action="MyItemsHistory">My items history</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+*@
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" asp-area="" asp-controller="Items" asp-action="ItemsIRegisteredToBid">Items I registered to bid </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-area="" asp-controller="Items" asp-action="MyItemsForSale">My items for sale</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-area="" asp-controller="Items" asp-action="MyItemsHistory">My items history</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+        </li>
+    </ul>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ItemID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Start price
+            </th>
+            <th>
+                Date
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        
+        @foreach (var item in Model.Items )
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="">Edit</a> | @*//NOT IMPLEMENTEED YET*@
+                    <a asp-action="Details" asp-route-id="">Details</a> |
+                    <a asp-action="Delete" asp-route-id="">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

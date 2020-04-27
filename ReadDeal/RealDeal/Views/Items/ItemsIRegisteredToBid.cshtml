@@ -1,0 +1,55 @@
+﻿@model RealDeal.Models.ItemViewModel;
+
+@{
+    ViewData["Title"] = "My registrations";
+}
+
+@*
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link" asp-area="" asp-controller="Items" asp-action="MyItemsForAuction">My items for auction</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-area="" asp-controller="Items" asp-action="MyItemsHistory">My items history</a>
+        </li>
+    </ul>*@
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                ItemID
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Start price
+            </th>
+            <th>
+                Date
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in Model.Items)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Tag)
+            </td>
+            <td>
+                <a asp-action="ItemDetails" asp-route-id="">Details</a> |
+                <a asp-action="ItemDelete" asp-route-id="">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

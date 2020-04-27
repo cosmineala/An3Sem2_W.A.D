@@ -4,7 +4,7 @@ using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace ReadDeal.Data
+namespace RealDeal.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {

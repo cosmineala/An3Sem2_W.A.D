@@ -10,7 +10,17 @@ dotnet ef migrations remove --context DataAccesDbContext
 ------
 add-migration "Migration_Name" -Context "DbContext_Name"
 
+update-database -Context "DbContext_Name"
+
 update-database -TargetMigration:"Migration_Name"
 
 
+-----
+add-migration InitialIdentity -Context ApplicationDbContext
+
+add-migration InitialDataAccess -Context DataAccesDbContext
+
+update-database -Context ApplicationDbContext
+
+update-database -Context DataAccesDbContext
 

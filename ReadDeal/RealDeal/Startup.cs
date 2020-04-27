@@ -8,14 +8,18 @@ using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
-using ReadDeal.Data;
+using RealDeal.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-using RealDeal.DataAcces;
+using RealDeal.DataAccess.Repositories;
+using RealDeal.AppLogic.Abstractions;
+using RealDeal.AppLogic.Services;
 
-namespace ReadDeal
+using RealDeal.DataAccess;
+
+namespace RealDeal
 {
     public class Startup
     {
@@ -31,20 +35,15 @@ namespace ReadDeal
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlite(
-                    Configuration.GetConnectionString("IdentityConnection")));
+                    Configuration.GetConnectionString("DefaultConection")));
 
             services.AddDbContext<DataAccesDbContext>(options =>
                 options.UseSqlite(
-                    Configuration.GetConnectionString("ReakDealConnection")
-                )
-            );
+                    Configuration.GetConnectionString("DefaultConection")));
 
-            //services.AddDbContext<DataAccesDbContext>(options =>
-            //    options.UseSqlite(
-            //        Configuration.GetConnectionString("ReakDealConnection"),
-            //        x => x.MigrationsAssembly("RealDeal")
-            //    )
-            //);
+            services.AddScoped<IItemRepository, ItemRepository>();
+            //services.AddScoped<ICourseRepository, CourseRepository>();
+            services.AddScoped<ItemService>();
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>();

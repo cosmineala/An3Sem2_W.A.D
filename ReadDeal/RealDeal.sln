@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealDeal.AppLogic", "RealDeal.AppLogic\RealDeal.AppLogic.csproj", "{FEAAA424-20CD-499F-837F-E5B18AA09758}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealDeal.DataAcces", "RealDeal.DataAcces\RealDeal.DataAcces.csproj", "{5C6F6F73-FDDB-4158-8B0D-B9538B1B2929}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealDeal.DataAccess", "RealDeal.DataAccess\RealDeal.DataAccess.csproj", "{5C6F6F73-FDDB-4158-8B0D-B9538B1B2929}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RealDeal", "RealDeal\RealDeal.csproj", "{93A1FAEF-3391-44BB-B474-4EA2E7626ED7}"
 EndProject

@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 using RealDeal.AppLogic.Models;
 
-namespace RealDeal.DataAcces
+namespace RealDeal.DataAccess
 {
     public class DataAccesDbContext : DbContext
     {
@@ -26,6 +26,10 @@ namespace RealDeal.DataAcces
 
             modelBuilder.Entity<History>()
                 .HasKey(pk => new { pk.UserID, pk.ItemID });
+
+
+            //modelBuilder.Entity<SomeObject>().Property(m => m.somefield).IsOptional();
+            //base.OnModelCreating(modelBuilder);
         }
     }
 }

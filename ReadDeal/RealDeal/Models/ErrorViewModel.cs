@@ -1,6 +1,6 @@
 using System;
 
-namespace ReadDeal.Models
+namespace RealDeal.Models
 {
     public class ErrorViewModel
     {
