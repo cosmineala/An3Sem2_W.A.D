@@ -16,7 +16,7 @@ namespace RealDeal.AppLogic.Models
         public string Phone { get; set; }
 
         public int UserTypeID { get; set; }
-        public UserType UserType { get; set; }
+        //public UserType UserType { get; set; }
 
         public ICollection<History> Histories { get; set; }
 
