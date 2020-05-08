@@ -37,12 +37,15 @@ namespace RealDeal
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConection")));
 
-            services.AddDbContext<DataAccesDbContext>(options =>
+            services.AddDbContext<DataAccessDbContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConection")));
 
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<UserService>();
             services.AddScoped<IItemRepository, ItemRepository>();
             services.AddScoped<ItemService>();
+            
 
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddRoles<IdentityRole>()

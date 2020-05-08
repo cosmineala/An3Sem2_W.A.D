@@ -7,8 +7,8 @@ namespace RealDeal.DataAccess.Repositories
 {
     public class BaseRepository<T> : IRepository<T> where T : class, new()
     {
-        protected readonly DataAccesDbContext dbContext;
-        public BaseRepository(DataAccesDbContext dbContext)
+        protected readonly DataAccessDbContext dbContext;
+        public BaseRepository(DataAccessDbContext dbContext)
         {
             this.dbContext = dbContext;
         }

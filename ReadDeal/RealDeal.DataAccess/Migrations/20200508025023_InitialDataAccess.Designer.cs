@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RealDeal.DataAccess;
 
 namespace RealDeal.DataAccess.Migrations
 {
-    [DbContext(typeof(DataAccesDbContext))]
-    partial class DataAccesDbContextModelSnapshot : ModelSnapshot
+    [DbContext(typeof(DataAccessDbContext))]
+    [Migration("20200508025023_InitialDataAccess")]
+    partial class InitialDataAccess
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -96,10 +98,10 @@ namespace RealDeal.DataAccess.Migrations
                     b.Property<string>("Email")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("FirstName")
+                    b.Property<Guid>("IdentityID")
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("LastName")
+                    b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Password")
@@ -108,31 +110,9 @@ namespace RealDeal.DataAccess.Migrations
                     b.Property<string>("Phone")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("UserTypeID")
-                        .HasColumnType("INTEGER");
-
                     b.HasKey("ID");
-
-                    b.HasIndex("UserTypeID");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("RealDeal.AppLogic.Models.UserType", b =>
-                {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Details")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("ID");
-
-                    b.ToTable("UserTypes");
                 });
 
             modelBuilder.Entity("RealDeal.AppLogic.Models.AuctionRegistration", b =>
@@ -170,15 +150,6 @@ namespace RealDeal.DataAccess.Migrations
                     b.HasOne("RealDeal.AppLogic.Models.User", "User")
                         .WithMany()
                         .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("RealDeal.AppLogic.Models.User", b =>
-                {
-                    b.HasOne("RealDeal.AppLogic.Models.UserType", "UserType")
-                        .WithMany("Users")
-                        .HasForeignKey("UserTypeID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

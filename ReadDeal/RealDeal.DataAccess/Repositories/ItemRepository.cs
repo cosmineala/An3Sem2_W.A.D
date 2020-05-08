@@ -9,7 +9,7 @@ namespace RealDeal.DataAccess.Repositories
 {
     public class ItemRepository : BaseRepository<Item>, IItemRepository
     {
-        public ItemRepository( DataAccesDbContext dbContext ) : base( dbContext )
+        public ItemRepository( DataAccessDbContext dbContext ) : base( dbContext )
         {
         }
 

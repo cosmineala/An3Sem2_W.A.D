@@ -8,42 +8,21 @@ namespace RealDeal.DataAccess.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "UserTypes",
-                columns: table => new
-                {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Type = table.Column<string>(nullable: true),
-                    Details = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_UserTypes", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    IdentityID = table.Column<Guid>(nullable: false),
                     Password = table.Column<string>(nullable: true),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     Adress = table.Column<string>(nullable: true),
-                    Phone = table.Column<string>(nullable: true),
-                    UserTypeID = table.Column<int>(nullable: false)
+                    Phone = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Users", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Users_UserTypes_UserTypeID",
-                        column: x => x.UserTypeID,
-                        principalTable: "UserTypes",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -135,11 +114,6 @@ namespace RealDeal.DataAccess.Migrations
                 name: "IX_Items_UserID",
                 table: "Items",
                 column: "UserID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_UserTypeID",
-                table: "Users",
-                column: "UserTypeID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -155,9 +129,6 @@ namespace RealDeal.DataAccess.Migrations
 
             migrationBuilder.DropTable(
                 name: "Users");
-
-            migrationBuilder.DropTable(
-                name: "UserTypes");
         }
     }
 }

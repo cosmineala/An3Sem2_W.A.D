@@ -6,9 +6,9 @@ using RealDeal.AppLogic.Models;
 
 namespace RealDeal.DataAccess
 {
-    public class DataAccesDbContext : DbContext
+    public class DataAccessDbContext : DbContext
     {
-        public DataAccesDbContext(DbContextOptions<DataAccesDbContext> options)
+        public DataAccessDbContext(DbContextOptions<DataAccessDbContext> options)
             : base(options)
         {
         }
