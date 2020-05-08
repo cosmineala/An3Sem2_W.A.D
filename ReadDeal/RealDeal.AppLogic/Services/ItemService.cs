@@ -35,6 +35,9 @@ namespace RealDeal.AppLogic.Services
             return itemRepository.GetUserHistory(user);
         }
 
-
+        public object GetMyItemsForSale(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

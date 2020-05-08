@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 using RealDeal.AppLogic.Models;
@@ -14,10 +15,14 @@ namespace RealDeal.Controllers
 {
     public class ItemsController : Controller
     {
-        private ItemService itemService;
+        private readonly UserManager<IdentityUser> identityServices;
+        private readonly UserService userService;
+        private readonly ItemService itemService;
 
-        public ItemsController(ItemService itemService)
+        public ItemsController(UserManager<IdentityUser> identityServices, ItemService itemService, UserService userService)
         {
+            this.identityServices = identityServices;
+            this.userService = userService; 
             this.itemService = itemService;
         }
 
@@ -31,11 +36,8 @@ namespace RealDeal.Controllers
 
         public IActionResult MyItemsForSale()
         {
-           
-            User user2 = new User();
-            user2.ID = 2;
-
-            var items = itemService.GetMyItemsForSale( user2 );
+            var user = userService.GetUserFromIdentity( identityServices.GetUserId(User) );
+            var items = itemService.GetMyItemsForSale( user );
 
             Console.WriteLine("");
             return View(new ItemViewModel { Items = items });
@@ -43,20 +45,18 @@ namespace RealDeal.Controllers
         
         public IActionResult ItemsIRegisteredToBid()
         {
-            User user2 = new User();
-            user2.ID = 2;
+            var user = userService.GetUserFromIdentity(identityServices.GetUserId(User));
 
-            var items = itemService.GetUserGetUserAuctionRegistrations(user2);
+            var items = itemService.GetUserGetUserAuctionRegistrations(user);
              
             return View( new ItemViewModel { Items = items } );
         }
 
         public IActionResult MyItemsHistory()
         {
-            User user2 = new User();
-            user2.ID = 2;
+            var user = userService.GetUserFromIdentity(identityServices.GetUserId(User));
 
-            var items = itemService.GetMyHistory(user2);
+            var items = itemService.GetMyHistory(user);
 
             Console.WriteLine("");
             return View(new ItemViewModel { Items = items });
