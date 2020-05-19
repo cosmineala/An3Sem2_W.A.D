@@ -1,0 +1,11 @@
+﻿@model RealDeal.AppLogic.Models.Item;
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<h1>
+    @Html.DisplayFor(d => d.Name)
+</h1>
+<h2>Sold by @Html.DisplayFor( d => d.User.Name ) </h2>
+<h3>Curent beding price @Html.DisplayFor( d => d.StartPrice )</h3>

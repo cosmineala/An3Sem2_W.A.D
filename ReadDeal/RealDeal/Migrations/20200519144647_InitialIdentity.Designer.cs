@@ -6,11 +6,11 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using RealDeal.Data;
 
-namespace RealDeal.Data.Migrations
+namespace RealDeal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200508021129_IdentityInitialCreate")]
-    partial class IdentityInitialCreate
+    [Migration("20200519144647_InitialIdentity")]
+    partial class InitialIdentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

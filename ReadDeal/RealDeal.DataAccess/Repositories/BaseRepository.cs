@@ -12,6 +12,12 @@ namespace RealDeal.DataAccess.Repositories
         {
             this.dbContext = dbContext;
         }
+
+        public T Get( int id)
+        {
+            return dbContext.Find<T>(id);
+        }
+
         public T Add(T itemToAdd)
         {
             var entity = dbContext.Add<T>(itemToAdd);
@@ -38,5 +44,10 @@ namespace RealDeal.DataAccess.Repositories
             dbContext.SaveChanges();
             return entity.Entity;
         }
+
+        //public T Get(T itemToFind)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

@@ -15,6 +15,19 @@ namespace RealDeal.AppLogic.Services
             this.itemRepository = itemRepository;
         }
 
+        public Item Get( int id)
+        {
+         
+            Item item = itemRepository.Get( id );
+
+            return item;
+        }
+
+        public Item GetItem( int id)
+        {
+            return itemRepository.GetItem(id);
+        }
+
         public IEnumerable<Item> GetAllItems()
         {
             return itemRepository.GetAll();

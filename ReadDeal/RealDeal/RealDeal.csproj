@@ -27,7 +27,6 @@
     <Folder Include="Data\Migrations\" />
     <Folder Include="Views\Items\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Data\Migrations\Identity\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\RealDeal.AppLogic\RealDeal.AppLogic.csproj">

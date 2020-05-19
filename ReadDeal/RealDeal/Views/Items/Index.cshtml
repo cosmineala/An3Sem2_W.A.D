@@ -1,4 +1,4 @@
-﻿@model RealDeal.Models.ItemViewModel;
+﻿@model IEnumerable<RealDeal.AppLogic.Models.Item>;
 
 @{
     ViewData["Title"] = "Index";
@@ -57,7 +57,7 @@
     </thead>
     <tbody>
         
-        @foreach (var item in Model.Items )
+        @foreach (var item in Model )
         {
             <tr>
                 <td>
@@ -68,7 +68,7 @@
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="">Edit</a> | @*//NOT IMPLEMENTEED YET*@
-                    <a asp-action="Details" asp-route-id="">Details</a> |
+                    <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
                     <a asp-action="Delete" asp-route-id="">Delete</a>
                 </td>
             </tr>

@@ -14,7 +14,7 @@ namespace RealDeal.AppLogic.Models
         public string Adress { get; set; }
         public string Phone { get; set; }
 
-        public ICollection<History> Histories { get; set; }
+        //public ICollection<History> Histories { get; set; }
 
         public ICollection<AuctionRegistration> AuctionRegistrations { get; set; }
     }

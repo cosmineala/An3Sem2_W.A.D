@@ -6,6 +6,7 @@ namespace RealDeal.AppLogic.Abstractions
 {
     public interface IRepository<T>
     {
+        T Get( int id );
         IEnumerable<T> GetAll();
         T Add(T itemToAdd);
         T Update(T itemToUpdate);

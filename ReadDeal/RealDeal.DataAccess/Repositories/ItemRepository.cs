@@ -13,6 +13,22 @@ namespace RealDeal.DataAccess.Repositories
         {
         }
 
+        public Item GetItem(int id)
+        {
+            Item item = null ;
+            try
+            {
+                item = dbContext.Items.Include( c => c.User)
+                                .Where(p => p.ID == id)
+                                .SingleOrDefault();
+            }catch( Exception e)
+            {
+                Exception exception = e;
+            }
+
+            return item;
+        }
+
         public IEnumerable<Item> GetUserAuctionRegistrations(User user)
         {
             var registrations = dbContext.AuctionRegistrations
@@ -36,7 +52,8 @@ namespace RealDeal.DataAccess.Repositories
             public IEnumerable<Item> GetItemsUserSales(User user)
         {
             //return dbContext.Items.Include( a => a.History ).Include( a => a.History.User )
-            return dbContext.Items.Include(a => a.History).Include(a => a.History.User)
+            //return dbContext.Items.Include(a => a.History).Include(a => a.History.User)
+            return dbContext.Items
                 .Where(p => p.UserID == user.ID)
                 .AsEnumerable();
         }

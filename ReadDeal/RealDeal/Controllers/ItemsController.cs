@@ -30,7 +30,7 @@ namespace RealDeal.Controllers
         {
             var items = itemService.GetAllItems();
 
-            return View( new ItemViewModel { Items = items });
+            return View( items );
             //return View(  );
         }
 
@@ -61,6 +61,31 @@ namespace RealDeal.Controllers
             Console.WriteLine("");
             return View(new ItemViewModel { Items = items });
             //return View();
+        }
+
+        //[HttpPost]
+        public IActionResult Details( int? id  )
+        {
+
+            if (id == null)
+            {
+                return View(null);
+            }
+
+            var item = itemService.GetItem( (int)id );
+
+            //var car = await _context.Cars.FindAsync(id);
+            if (item == null)
+            {
+                return NotFound();
+            }
+            return View( item );
+
+        }
+
+        public IActionResult Item( int? id, int price )
+        {
+            return View( id );
         }
     }
 }
