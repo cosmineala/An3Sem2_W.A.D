@@ -1,4 +1,4 @@
-﻿@model RealDeal.Models.ItemViewModel;
+﻿@model IEnumerable<RealDeal.AppLogic.Models.Item>;
 
 @using Microsoft.AspNetCore.Identity;
 @using RealDeal.AppLogic.Services;
@@ -50,7 +50,7 @@
     </thead>
     <tbody>
 
-        @foreach (var item in Model.Items)
+        @foreach (var item in Model)
         {
             <tr>
                 <td>

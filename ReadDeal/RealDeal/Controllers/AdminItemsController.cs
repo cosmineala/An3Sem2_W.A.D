@@ -78,7 +78,7 @@ namespace RealDeal.Controllers
             {
                 _context.Add(item);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("MyItemsForSale", "Items");
             }
             ViewData["BuyerID"] = new SelectList(_context.Users, "ID", "ID", item.BuyerID);
             ViewData["OwnerID"] = new SelectList(_context.Users, "ID", "ID", item.OwnerID);

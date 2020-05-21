@@ -31,9 +31,11 @@ namespace RealDeal.Controllers
 
         public IActionResult Index()
         {
-            var items = itemService.GetAllItems();
+            //var items = itemService.GetAllItems();
+            var items = _context.Items.Include(p => p.Owner)
+                        .AsEnumerable();
 
-            return View( new ItemViewModel { Items = items });
+            return View( items );
             //return View(  );
         }
 
@@ -93,17 +95,17 @@ namespace RealDeal.Controllers
 
         //    return View();
         //}
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var item = await _context.Items
+            var item = _context.Items
                 .Include(i => i.Buyer)
                 .Include(i => i.Owner)
-                .FirstOrDefaultAsync(m => m.ID == id);
+                .FirstOrDefault(m => m.ID == id);
             if (item == null)
             {
                 return NotFound();
@@ -116,37 +118,38 @@ namespace RealDeal.Controllers
         public IActionResult Details(int id, [Bind("ID,Name,StartPrice,AuctionDate,AuctionDeadline,Description,Tag,OwnerID,BuyerID")] Item item)
         {
             var user = userService.GetUserFromIdentity(identityServices.GetUserId(User));
+            var oriItem = itemService.GetItem(id);
 
-            item.Buyer = user;
+            if( oriItem.StartPrice < item.StartPrice)
+            {
+                oriItem.BuyerID = user.ID;
+
+                oriItem.StartPrice = item.StartPrice;
+
+                _context.Update(oriItem);
+                _context.SaveChangesAsync();
+
+            }
+            return Details( id );
+        }
+
+        // POST: AdminItems/Create
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create([Bind("ID,Name,StartPrice,AuctionDate,AuctionDeadline,Description,Tag")] Item item)
+        {
+            var user = userService.GetUserFromIdentity(identityServices.GetUserId(User));
+
             item.BuyerID = user.ID;
+            item.OwnerID = user.ID;
 
-            if (id != item.ID)
-            {
-                return NotFound();
-            }
+            _context.Add(item);
+            await _context.SaveChangesAsync();
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(item);
-                    _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ItemExists(item.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return View( item );
-            }
-
-            return View(item);
+            return RedirectToAction(nameof(Index));
+          
         }
 
         private bool ItemExists(int id)
