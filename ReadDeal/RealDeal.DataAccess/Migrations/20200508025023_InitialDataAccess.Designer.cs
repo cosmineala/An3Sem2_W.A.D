@@ -9,7 +9,7 @@ using RealDeal.DataAccess;
 namespace RealDeal.DataAccess.Migrations
 {
     [DbContext(typeof(DataAccessDbContext))]
-    [Migration("20200519145329_InitialDataAccess")]
+    [Migration("20200508025023_InitialDataAccess")]
     partial class InitialDataAccess
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,6 +33,28 @@ namespace RealDeal.DataAccess.Migrations
                     b.ToTable("AuctionRegistrations");
                 });
 
+            modelBuilder.Entity("RealDeal.AppLogic.Models.History", b =>
+                {
+                    b.Property<int>("UserID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ItemID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("BuyDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("BuyPrice")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("UserID", "ItemID");
+
+                    b.HasIndex("ItemID")
+                        .IsUnique();
+
+                    b.ToTable("Histories");
+                });
+
             modelBuilder.Entity("RealDeal.AppLogic.Models.Item", b =>
                 {
                     b.Property<int>("ID")
@@ -48,16 +70,10 @@ namespace RealDeal.DataAccess.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("TEXT");
 
-                    b.Property<int?>("Owner")
-                        .HasColumnType("INTEGER");
-
                     b.Property<decimal>("StartPrice")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Tag")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime?>("Timer")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("UserID")
@@ -109,6 +125,21 @@ namespace RealDeal.DataAccess.Migrations
 
                     b.HasOne("RealDeal.AppLogic.Models.User", "User")
                         .WithMany("AuctionRegistrations")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("RealDeal.AppLogic.Models.History", b =>
+                {
+                    b.HasOne("RealDeal.AppLogic.Models.Item", "Item")
+                        .WithOne("History")
+                        .HasForeignKey("RealDeal.AppLogic.Models.History", "ItemID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("RealDeal.AppLogic.Models.User", "User")
+                        .WithMany("Histories")
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

@@ -34,10 +34,8 @@ namespace RealDeal.DataAccess.Migrations
                     Name = table.Column<string>(nullable: true),
                     StartPrice = table.Column<decimal>(nullable: false),
                     AuctionDate = table.Column<DateTime>(nullable: true),
-                    Timer = table.Column<DateTime>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Tag = table.Column<string>(nullable: true),
-                    Owner = table.Column<int>(nullable: true),
                     UserID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -75,10 +73,42 @@ namespace RealDeal.DataAccess.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Histories",
+                columns: table => new
+                {
+                    UserID = table.Column<int>(nullable: false),
+                    ItemID = table.Column<int>(nullable: false),
+                    BuyPrice = table.Column<decimal>(nullable: false),
+                    BuyDate = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Histories", x => new { x.UserID, x.ItemID });
+                    table.ForeignKey(
+                        name: "FK_Histories_Items_ItemID",
+                        column: x => x.ItemID,
+                        principalTable: "Items",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Histories_Users_UserID",
+                        column: x => x.UserID,
+                        principalTable: "Users",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AuctionRegistrations_ItemID",
                 table: "AuctionRegistrations",
                 column: "ItemID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Histories_ItemID",
+                table: "Histories",
+                column: "ItemID",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Items_UserID",
@@ -90,6 +120,9 @@ namespace RealDeal.DataAccess.Migrations
         {
             migrationBuilder.DropTable(
                 name: "AuctionRegistrations");
+
+            migrationBuilder.DropTable(
+                name: "Histories");
 
             migrationBuilder.DropTable(
                 name: "Items");

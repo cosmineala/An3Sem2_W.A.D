@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace RealDeal.Migrations
+namespace RealDeal.Data.Migrations
 {
-    public partial class InitialIdentity : Migration
+    public partial class IdentityInitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
