@@ -36,8 +36,8 @@ namespace RealDeal.DataAccess.Repositories
             public IEnumerable<Item> GetItemsUserSales(User user)
         {
             //return dbContext.Items.Include( a => a.History ).Include( a => a.History.User )
-            return dbContext.Items.Include(a => a.History).Include(a => a.History.User)
-                .Where(p => p.UserID == user.ID)
+            return dbContext.Items//.Include(a => a.History).Include(a => a.History.User)
+                .Where(p => p.OwnerID == user.ID)
                 .AsEnumerable();
         }
 
