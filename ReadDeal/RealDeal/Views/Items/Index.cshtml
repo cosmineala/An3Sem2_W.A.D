@@ -1,39 +1,29 @@
 ﻿@model RealDeal.Models.ItemViewModel;
 
+@using Microsoft.AspNetCore.Identity;
+@using RealDeal.AppLogic.Services;
+@inject UserManager<IdentityUser> identityServices;
+@inject UserService userService;
+
 @{
     ViewData["Title"] = "Index";
 }
-@*
-    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container">
 
-            <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                <ul class="navbar-nav flex-grow-1">
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Items" asp-action="MyItemsForAuction">My items for auction</a>
-                    </li>
-                    <li>
-                        |
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Items" asp-action="MyItemsHistory">My items history</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-*@
-    <ul class="nav nav-tabs">
-        <li class="nav-item">
-            <a class="nav-link" asp-area="" asp-controller="Items" asp-action="ItemsIRegisteredToBid">Items I registered to bid </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" asp-area="" asp-controller="Items" asp-action="MyItemsForSale">My items for sale</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" asp-area="" asp-controller="Items" asp-action="MyItemsHistory">My items history</a>
-        </li>
-    </ul>
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Items" asp-action="ItemsIRegisteredToBid">Items I registered to bid </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Items" asp-action="MyItemsForSale">My items for sale</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Items" asp-action="MyItemsHistory">My items history</a>
+    </li>
+</ul>
+
+<br />
+<a asp-controller="AdminItems" asp-action="Create" asp-route-id="">Register item</a>
+<br />
 
 <table class="table">
     <thead>
@@ -50,11 +40,17 @@
             <th>
                 Date
             </th>
+            <th>
+                Owner
+            </th>
+            <th>
+                Options
+            </th>
         </tr>
     </thead>
     <tbody>
-        
-        @foreach (var item in Model.Items )
+
+        @foreach (var item in Model.Items)
         {
             <tr>
                 <td>
@@ -64,8 +60,30 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    <a asp-controller="AdminItems" asp-action="Details" asp-route-id="@item.ID">Details</a> 
+                    @Html.DisplayFor(modelItem => item.StartPrice)
                 </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.AuctionDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Owner.Name)
+                </td>
+                <td>
+                    @{var user = userService.GetUserFromIdentity(identityServices.GetUserId(User));}
+                    @if (item.OwnerID == user.ID)
+                    {
+
+                        <a asp-controller="AdminItems" asp-action="Edit" asp-route-id="@item.ID">Edit</a>
+
+                    }
+                    else
+                    {
+                        <a asp-controller="Items" asp-action="RegisterMeToBid" asp-route-id="@item.ID">Register</a>
+                    }
+                    |
+                    <a asp-controller="AdminItems" asp-action="Details" asp-route-id="@item.ID">Details</a>
+                </td>
+
             </tr>
         }
     </tbody>

@@ -15,6 +15,11 @@ namespace RealDeal.AppLogic.Services
             this.itemRepository = itemRepository;
         }
 
+        public Item GetItem( int id)
+        {
+            return itemRepository.GetItem(id);
+        }
+
         public IEnumerable<Item> GetAllItems()
         {
             return itemRepository.GetAll();
@@ -35,9 +40,19 @@ namespace RealDeal.AppLogic.Services
             return itemRepository.GetUserHistory(user);
         }
 
-        public object GetMyItemsForSale(string v)
+        //public object GetMyItemsForSale(string v)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
+        public void RegisterToBid( User user, Item item)
         {
-            throw new NotImplementedException();
+            itemRepository.RegisterToBid(user, item);
+        }
+
+        public void UnregisterToBid(User user, Item item)
+        {
+            itemRepository.UnregisterToBid(user, item);
         }
     }
 }

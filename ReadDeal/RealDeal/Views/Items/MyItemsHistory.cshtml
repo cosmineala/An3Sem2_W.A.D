@@ -4,15 +4,17 @@
     ViewData["Title"] = "MyItemsHistory";
 }
 
-<ul class="nav nav-tabs">
-    <li class="nav-item">
-        <a class="nav-link" asp-area="" asp-controller="Items" asp-action="MyItemsForAuction">My items for auction</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link" asp-area="" asp-controller="Items" asp-action="MyItemsHistory">My items history</a>
-    </li>
-</ul>
-
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Items" asp-action="ItemsIRegisteredToBid">Items I registered to bid </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Items" asp-action="MyItemsForSale">My items for sale</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" asp-area="" asp-controller="Items" asp-action="MyItemsHistory">My items history</a>
+        </li>
+    </ul>
 <table class="table">
     <thead>
         <tr>

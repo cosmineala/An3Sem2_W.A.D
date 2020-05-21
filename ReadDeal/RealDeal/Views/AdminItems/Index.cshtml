@@ -61,10 +61,10 @@
                 @Html.DisplayFor(modelItem => item.Tag)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Owner.ID)
+                @Html.DisplayFor(modelItem => item.Owner.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Buyer.ID)
+                @Html.DisplayFor(modelItem => item.Buyer.Name)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

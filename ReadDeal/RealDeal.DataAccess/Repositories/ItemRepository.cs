@@ -13,6 +13,12 @@ namespace RealDeal.DataAccess.Repositories
         {
         }
 
+        public Item GetItem( int id)
+        {
+            return dbContext.Items
+                    .SingleOrDefault(p => p.ID == id);
+        }
+
         public IEnumerable<Item> GetUserAuctionRegistrations(User user)
         {
             var registrations = dbContext.AuctionRegistrations
@@ -43,7 +49,27 @@ namespace RealDeal.DataAccess.Repositories
 
         public IEnumerable<Item> GetUserHistory(User user)
         {
-            throw new NotImplementedException();
+            return dbContext.Items
+                .Where(p => ( p.Buyer == user && p.Owner != p.Buyer ) )
+                .AsEnumerable();
+        }
+
+        public void RegisterToBid( User user, Item item)
+        {
+            AuctionRegistration registration = new AuctionRegistration { Item = item, ItemID = item.ID, User = user, UserID = user.ID };
+
+            dbContext.AuctionRegistrations
+                .Add(registration);
+            dbContext.SaveChanges();
+        }
+
+        public void UnregisterToBid(User user, Item item)
+        {
+            AuctionRegistration registration = new AuctionRegistration { Item = item, ItemID = item.ID, User = user, UserID = user.ID };
+
+            dbContext.AuctionRegistrations
+                .Remove(registration);
+            dbContext.SaveChanges();
         }
     }
 }

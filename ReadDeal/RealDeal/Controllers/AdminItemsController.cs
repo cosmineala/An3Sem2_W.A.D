@@ -71,7 +71,7 @@ namespace RealDeal.Controllers
         {
             var user = userService.GetUserFromIdentity(identityServices.GetUserId(User));
 
-            item.Buyer = null;
+            item.BuyerID = user.ID;
             item.OwnerID = user.ID;
 
             if (ModelState.IsValid)

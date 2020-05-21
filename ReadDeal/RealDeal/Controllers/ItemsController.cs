@@ -62,5 +62,26 @@ namespace RealDeal.Controllers
             return View(new ItemViewModel { Items = items });
             //return View();
         }
+
+        public IActionResult RegisterMeToBid( int id)
+        {
+            var user = userService.GetUserFromIdentity(identityServices.GetUserId(User));
+            var item = itemService.GetItem(id);
+
+            itemService.RegisterToBid(user, item);
+
+            return RedirectToAction(nameof(ItemsIRegisteredToBid ));
+        }
+
+
+        public IActionResult UnregisterMeToBid(int id)
+        {
+            var user = userService.GetUserFromIdentity(identityServices.GetUserId(User));
+            var item = itemService.GetItem(id);
+
+            itemService.UnregisterToBid(user, item);
+
+            return RedirectToAction(nameof(ItemsIRegisteredToBid));
+        }
     }
 }
