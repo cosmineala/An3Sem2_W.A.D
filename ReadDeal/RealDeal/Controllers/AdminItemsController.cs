@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using RealDeal.AppLogic.Models;
+using RealDeal.AppLogic.Services;
 using RealDeal.DataAccess;
 
 namespace RealDeal.Controllers
@@ -13,10 +15,16 @@ namespace RealDeal.Controllers
     public class AdminItemsController : Controller
     {
         private readonly DataAccessDbContext _context;
+        private readonly UserManager<IdentityUser> identityServices;
+        private readonly UserService userService;
+        private readonly ItemService itemService;
 
-        public AdminItemsController(DataAccessDbContext context)
+        public AdminItemsController(DataAccessDbContext context, UserManager<IdentityUser> identityServices, ItemService itemService, UserService userService)
         {
             _context = context;
+            this.identityServices = identityServices;
+            this.userService = userService;
+            this.itemService = itemService;
         }
 
         // GET: AdminItems
@@ -59,8 +67,13 @@ namespace RealDeal.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,StartPrice,AuctionDate,AuctionDeadline,Description,Tag,OwnerID,BuyerID")] Item item)
+        public async Task<IActionResult> Create([Bind("ID,Name,StartPrice,AuctionDate,AuctionDeadline,Description,Tag")] Item item)
         {
+            var user = userService.GetUserFromIdentity(identityServices.GetUserId(User));
+
+            item.Buyer = null;
+            item.OwnerID = user.ID;
+
             if (ModelState.IsValid)
             {
                 _context.Add(item);

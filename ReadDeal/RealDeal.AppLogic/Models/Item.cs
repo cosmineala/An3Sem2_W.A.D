@@ -17,7 +17,7 @@ namespace RealDeal.AppLogic.Models
         public int OwnerID { get; set; }
         public User Owner { get; set; }
 
-        public int BuyerID { get; set; }
+        public int? BuyerID { get; set; }
         public User? Buyer { get; set; }
 
         public ICollection<AuctionRegistration> AuctionRegistrations { get; set; }

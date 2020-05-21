@@ -33,9 +33,6 @@
         <li class="nav-item">
             <a class="nav-link" asp-area="" asp-controller="Items" asp-action="MyItemsHistory">My items history</a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-        </li>
     </ul>
 
 <table class="table">
@@ -67,9 +64,7 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="">Edit</a> | @*//NOT IMPLEMENTEED YET*@
-                    <a asp-action="Details" asp-route-id="">Details</a> |
-                    <a asp-action="Delete" asp-route-id="">Delete</a>
+                    <a asp-controller="AdminItems" asp-action="Details" asp-route-id="@item.ID">Details</a> 
                 </td>
             </tr>
         }
